@@ -153,32 +153,29 @@ void loop() {
     delayMicroseconds(1000);
     Serial.print(zPos);
   }
-  while(xPos < 2500) {
-        digitalWrite(xDirPin, LOW);
-        digitalWrite(yDirPin, LOW);
-        xPos += 1;
-        yPos += 1;
-        digitalWrite(xStepPin, HIGH);
-        digitalWrite(yStepPin, HIGH);
-        delayMicroseconds(1000);
-        digitalWrite(xStepPin,LOW);
-        digitalWrite(yStepPin,LOW);
-        delayMicroseconds(1000);
+  goSq(1000, 1700);
+  while (zPos >= 0) {
+    digitalWrite(zDirPin, HIGH);
+    zPos -= 1;
+    digitalWrite(zStepPin, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(zStepPin,LOW);
+    delayMicroseconds(1000);
+    Serial.print(zPos);
   }
-  moveX(500);
-  while(xPos < 1000) {
-        digitalWrite(xDirPin, LOW);
-        digitalWrite(yDirPin, HIGH);
-        xPos += 1;
-        yPos -= 1;
-        digitalWrite(xStepPin, HIGH);
-        digitalWrite(yStepPin, HIGH);
-        delayMicroseconds(1000);
-        digitalWrite(xStepPin,LOW);
-        digitalWrite(yStepPin,LOW);
-        delayMicroseconds(1000);
+
+  goSq(2000, 850);
+  while (zPos <= 212) {
+    digitalWrite(zDirPin, LOW);
+    zPos += 1;
+    digitalWrite(zStepPin, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(zStepPin,LOW);
+    delayMicroseconds(1000);
+    Serial.print(zPos);
   }
-  while (zPos > 2) {
+  goSq(2000, 1700);
+  while (zPos >= 0) {
     digitalWrite(zDirPin, HIGH);
     zPos -= 1;
     digitalWrite(zStepPin, HIGH);

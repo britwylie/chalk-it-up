@@ -216,7 +216,11 @@ void homingSequence() {
 }
 
 void loop() {
-  while (zPos <= 210) {
+  delayMicroseconds(5000);
+  
+  // put your main code here, to run repeatedly:
+  goSq(1100, 1000);
+  while (zPos <= 205) {
     digitalWrite(zDirPin, LOW);
     zPos += 1;
     digitalWrite(zStepPin, HIGH);
@@ -225,9 +229,7 @@ void loop() {
     delayMicroseconds(1000);
     Serial.print(zPos);
   }
-  // put your main code here, to run repeatedly:
-  goSq(1000, 850);
-  while(xPos < 1500) {
+  while(xPos < 2200) {
         digitalWrite(xDirPin, LOW);
         digitalWrite(yDirPin, LOW);
         xPos += 1;
@@ -252,7 +254,7 @@ void loop() {
         digitalWrite(yStepPin,LOW);
         delayMicroseconds(1000);
   }
-  while (zPos > 1) {
+  while (zPos > 2) {
     digitalWrite(zDirPin, HIGH);
     zPos -= 1;
     digitalWrite(zStepPin, HIGH);
@@ -261,5 +263,6 @@ void loop() {
     delayMicroseconds(1000);
     Serial.print(zPos);
   }
+  delayMicroseconds(5000);
   homingSequence();
 }
