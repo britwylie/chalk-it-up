@@ -21,6 +21,8 @@
 #define emagPin 21
 
 void setup() {
+  // Set up serial monitor communication
+  
   // Declare motors and electomagnet as output:
   pinMode(xStepPin, OUTPUT);
   pinMode(xDirPin, OUTPUT);
