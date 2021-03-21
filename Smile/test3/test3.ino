@@ -51,81 +51,6 @@ void setup() {
   homingSequence();
 }
 
-/*void diag4(int xWant, int yWant) {
-  while (xPos != xWant || yPos != yWant) {
-      if (xPos > xWant) {
-        digitalWrite(xDirPin, HIGH);
-        digitalWrite(yDirPin, HIGH);
-        xPos -= 1;
-        yPos -= 1;
-        digitalWrite(xStepPin, HIGH);
-        digitalWrite(yStepPin, HIGH);
-        delayMicroseconds(1000);
-        digitalWrite(xStepPin,LOW);
-        digitalWrite(yStepPin,LOW);
-        delayMicroseconds(1000);
-      }
-      else if (yPos > yWant) {
-        digitalWrite(yDirPin, HIGH);
-        yPos -= 1;
-        digitalWrite(yStepPin, HIGH);
-        delayMicroseconds(1000);
-        digitalWrite(yStepPin,LOW);
-        delayMicroseconds(1000);
-      }
-    }
-}
-
-void diag3(int xWant, int yWant) {
-  while (xPos != xWant || yPos != yWant) {
-      if (xPos > xWant) {
-        digitalWrite(xDirPin, HIGH);
-        digitalWrite(yDirPin, HIGH);
-        xPos -= 1;
-        yPos -= 1;
-        digitalWrite(xStepPin, HIGH);
-        digitalWrite(yStepPin, HIGH);
-        delayMicroseconds(1000);
-        digitalWrite(xStepPin,LOW);
-        digitalWrite(yStepPin,LOW);
-        delayMicroseconds(1000);
-      }
-      else if (yPos > yWant) {
-        digitalWrite(yDirPin, HIGH);
-        yPos -= 1;
-        digitalWrite(yStepPin, HIGH);
-        delayMicroseconds(1000);
-        digitalWrite(yStepPin,LOW);
-        delayMicroseconds(1000);
-      }
-    }
-}
-
-void diag1(int xWant, int yWant) {
-  while (xPos != xWant || yPos != yWant) {
-      if (xPos < xWant) {
-        digitalWrite(xDirPin, LOW);
-        digitalWrite(yDirPin, LOW);
-        xPos += 1;
-        yPos += 1;
-        digitalWrite(xStepPin, HIGH);
-        digitalWrite(yStepPin, HIGH);
-        delayMicroseconds(1000);
-        digitalWrite(xStepPin,LOW);
-        digitalWrite(yStepPin,LOW);
-        delayMicroseconds(1000);
-      }
-      else if (yPos < yWant) {
-        digitalWrite(yDirPin, LOW);
-        yPos += 1;
-        digitalWrite(yStepPin, HIGH);
-        delayMicroseconds(1000);
-        digitalWrite(yStepPin,LOW);
-        delayMicroseconds(1000);
-      }
-    }
-}*/
-
 void moveX(int xWant) {
   while (xPos != xWant) {
       if (xPos < xWant) {
@@ -216,7 +141,12 @@ void homingSequence() {
 }
 
 void loop() {
-  while (zPos <= 210) {
+  delayMicroseconds(500000);
+  // put your main code here, to run repeatedly:
+  goSq(1100, 1000);
+  
+  // move down
+  while (zPos <= 212) {
     digitalWrite(zDirPin, LOW);
     zPos += 1;
     digitalWrite(zStepPin, HIGH);
@@ -225,34 +155,47 @@ void loop() {
     delayMicroseconds(1000);
     Serial.print(zPos);
   }
-  // put your main code here, to run repeatedly:
-  goSq(1000, 850);
-  while(xPos < 1500) {
+  int step = 1;
+  while(step < 5) {
+    if ((step % 2) == 0) {
+      for (int i = 1; i < step*2; i++) {
+      // These four lines result in 1 step:
         digitalWrite(xDirPin, LOW);
         digitalWrite(yDirPin, LOW);
+        xPos -= 1;
+        yPos -= 1;
+        digitalWrite(xStepPin, HIGH);
+        delayMicroseconds(1000);
+        digitalWrite(xStepPin,LOW);
+        delayMicroseconds(1000);
+        
+        digitalWrite(yStepPin, HIGH);
+        delayMicroseconds(1000);
+        digitalWrite(yStepPin,LOW);
+        delayMicroseconds(1000);
+        
+      }
+      } else {
+      for (int i = 1; i < step*2 + 1; i++) {
+      // These four lines result in 1 step:
+        digitalWrite(xDirPin, HIGH);
+        digitalWrite(yDirPin, HIGH);
         xPos += 1;
         yPos += 1;
         digitalWrite(xStepPin, HIGH);
-        digitalWrite(yStepPin, HIGH);
         delayMicroseconds(1000);
         digitalWrite(xStepPin,LOW);
-        digitalWrite(yStepPin,LOW);
         delayMicroseconds(1000);
-  }
-  moveX(500);
-  while(xPos < 1000) {
-        digitalWrite(xDirPin, LOW);
-        digitalWrite(yDirPin, HIGH);
-        xPos += 1;
-        yPos -= 1;
-        digitalWrite(xStepPin, HIGH);
+        
         digitalWrite(yStepPin, HIGH);
         delayMicroseconds(1000);
-        digitalWrite(xStepPin,LOW);
         digitalWrite(yStepPin,LOW);
         delayMicroseconds(1000);
-  }
-  while (zPos > 1) {
+        }
+      }
+    }
+  
+  while (zPos > 2) {
     digitalWrite(zDirPin, HIGH);
     zPos -= 1;
     digitalWrite(zStepPin, HIGH);
@@ -261,5 +204,7 @@ void loop() {
     delayMicroseconds(1000);
     Serial.print(zPos);
   }
+  zPos = 0;
   homingSequence();
+  delayMicroseconds(500000);
 }
