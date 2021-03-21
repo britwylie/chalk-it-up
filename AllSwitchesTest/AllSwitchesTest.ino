@@ -17,6 +17,7 @@ void setup() {
 }
 
 void loop() {
+
   
   if (digitalRead(xSwitchPin)) {
     digitalWrite(ledPin, HIGH);
@@ -26,6 +27,16 @@ void loop() {
   }
   else if (digitalRead(zSwitchPin)) {
     digitalWrite(ledPin, HIGH);
+
+  if (digitalRead(xSwitchPin) == HIGH) {
+    digitalWrite(LED_BUILTIN, HIGH);
+  }
+  else if (digitalRead(ySwitchPin) == HIGH) {
+    digitalWrite(LED_BUILTIN, HIGH);
+  }
+  else if (digitalRead(zSwitchPin) == HIGH) {
+    digitalWrite(LED_BUILTIN, HIGH);
+
   }
   else digitalWrite(ledPin, LOW);
   delay(25); //wait 25 ms

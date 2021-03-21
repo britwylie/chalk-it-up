@@ -20,10 +20,6 @@
 //Define electromagnet pin
 #define emagPin 21
 
-int xSwitchState = 0;
-int ySwitchState = 0;
-int zSwitchState = 0;
-
 void setup() {
   // Declare motors and electomagnet as output:
   pinMode(xStepPin, OUTPUT);
@@ -43,8 +39,7 @@ void setup() {
 }
 
 void loop() {
-    // Home z
-  while (xSwitchState == HIGH) {
+  while (digitalRead(xSwitchPin) == HIGH) {
     // Set the spinning direction clockwise:
     digitalWrite(xDirPin, HIGH);
     // Spin the stepper motor 1 revolution quickly:
@@ -57,7 +52,7 @@ void loop() {
       }
   }
   
-  while (ySwitchState == HIGH) {
+  while (digitalRead(ySwitchPin) == HIGH) {
     // Set the spinning direction counterclockwise:
     digitalWrite(xDirPin, LOW);
     // Spin the stepper motor 1 revolution quickly:
