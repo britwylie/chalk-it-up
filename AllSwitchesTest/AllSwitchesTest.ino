@@ -6,24 +6,27 @@
 int xSwitchState = 0;
 int ySwitchState = 0;
 int zSwitchState = 0;
+int ledPin = 13;
 
 void setup() {
   // Declare limit switches and current sensor as input:
   pinMode(xSwitchPin, INPUT);
   pinMode(ySwitchPin, INPUT);
   pinMode(zSwitchPin, INPUT);
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(ledPin, OUTPUT);
 }
 
 void loop() {
-  if (xSwitchState == HIGH) {
-    digitalWrite(LED_BUILTIN, HIGH);
+  
+  if (digitalRead(xSwitchPin)) {
+    digitalWrite(ledPin, HIGH);
   }
-  else if (ySwitchState == HIGH) {
-    digitalWrite(LED_BUILTIN, HIGH);
+  else if (digitalRead(ySwitchPin)) {
+    digitalWrite(ledPin, HIGH);
   }
-  else if (zSwitchState == HIGH) {
-    digitalWrite(LED_BUILTIN, HIGH);
+  else if (digitalRead(zSwitchPin)) {
+    digitalWrite(ledPin, HIGH);
   }
-  else digitalWrite(LED_BUILTIN, LOW);
+  else digitalWrite(ledPin, LOW);
+  delay(25); //wait 25 ms
 }
