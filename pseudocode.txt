@@ -1,0 +1,27 @@
+CHALK CNC PSEUDOCODE
+
+PINS:
+2  - X motor direction   OUTPUT
+3  - X motor step        OUTPUT
+4  - Y motor direction   OUTPUT
+5  - Y motor step        OUTPUT
+6  - Z motor direction   OUTPUT
+7  - Z motor step        OUTPUT
+8  - X limit switch      INPUT
+10  - Y limit switch      INPUT
+11 - Z limit switch      INPUT
+
+14 - Z current sensor    INPUT
+21 - Electromagnet       OUTPUT
+
+
+Startup - Homing sequence
+Z - run until limit switch hit, note position
+X - run until limit switch hit, note position
+Y - run until limit switch hit, note position
+
+ooh we can draw fancy limacons and cardiods and radial graphs and parametric graphs.
+
+Go to start, push down chalk
+Move a distance
+Check chalk pressure
