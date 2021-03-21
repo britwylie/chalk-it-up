@@ -15,7 +15,7 @@
 #define zStepPin 7
 
 // change this to change the step distance?
-#define stepsPerRevolution 100
+#define stepsPerRevolution 16
 
 #define emagPin 21
 
@@ -27,6 +27,10 @@ int ySS = 0;
 int zSS = 0;
 int ledPin = 13;
 
+// Define xyz coordinates 
+int xPos = 0;
+int yPos = 0;
+int zPos = 0;
 
 
 void setup() {
@@ -47,29 +51,77 @@ void setup() {
   pinMode(emagPin, OUTPUT);
  
   pinMode(ledPin, OUTPUT);
-  homing-sequence();
+
+  // Run the initial homing sequence to move the chalk handler to 0,0
+  homingSequence();
 }
 
-// Capture all pin states
-void pinStates() {
-  xSS = digitalRead(xSP);
-  ySS = digitalRead(ySP);
-  zSS = digitalRead(zSP);
-}
+
 
 // Sequence to move to 0,0 and set the motors home
-void homing-sequence() {
-  //check if already homed
-  pinStates();
-  if (xSS == HIGH) {
-    
-  }
+void homingSequence() {
+  // Home X
+  while(!digitalRead(xSwitchPin)) {
+    digitalWrite(xDirPin, HIGH);
+    for (int i = 0; i < stepsPerRevolution; i++) {
+      digitalWrite(xStepPin, HIGH);
+      delayMicroseconds(1000);
+      digitalWrite(xStepPin,LOW);
+      delayMicroseconds(1000);
+    }
+  }  
+  delayMicroseconds(5000);
   
+  while(!digitalRead(ySwitchPin)) {
+    digitalWrite(yDirPin, HIGH);
+    for (int i = 0; i < stepsPerRevolution; i++) {
+      digitalWrite(yStepPin, HIGH);
+      delayMicroseconds(1000);
+      digitalWrite(yStepPin,LOW);
+      delayMicroseconds(1000);
+    }
+  }  
+  delayMicroseconds(5000);
   
+  while(!digitalRead(zSwitchPin)) {
+    digitalWrite(zDirPin, HIGH);
+    for (int i = 0; i < stepsPerRevolution; i++) {
+      digitalWrite(zStepPin, HIGH);
+      delayMicroseconds(1000);
+      digitalWrite(zStepPin,LOW);
+      delayMicroseconds(1000);
+    }
+  }  
+  delayMicroseconds(5000);
+
+  //Modify the global coordinates
+  xPos = 0;
+  yPos = 0;
+  zPos = 0;
   
 }
 
 void loop() {
-
-  delay(25); //wait 25 ms
+  // move to end of x travel
+  while (xPos <= 2000) {
+    digitalWrite(xDirPin, LOW);
+    xPos += 1;
+    digitalWrite(xStepPin, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(xStepPin,LOW);
+    delayMicroseconds(1000);
+  }
+  delayMicroseconds(1000000); //wait 1 s
+  //
+  while (yPos <= 1500) {
+    digitalWrite(yDirPin, LOW);
+    yPos += 1;
+    digitalWrite(yStepPin, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(yStepPin,LOW);
+    delayMicroseconds(1000);
+  }
+  delayMicroseconds(1000000); //wait 1 s
+  
+  homingSequence();
 }
