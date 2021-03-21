@@ -13,13 +13,13 @@ void setup() {
 
 void loop() {
   if (digitalRead(xSwitchPin) == HIGH) {
-    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(LED_BUILTIN, HIGH);
   }
   else if (digitalRead(ySwitchPin) == HIGH) {
-    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(LED_BUILTIN, HIGH);
   }
   else if (digitalRead(zSwitchPin) == HIGH) {
-    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(LED_BUILTIN, HIGH);
   }
-  else digitalWrite(LED_BUILTIN, HIGH);
+  else digitalWrite(LED_BUILTIN, LOW);
 }
