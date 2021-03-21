@@ -39,28 +39,28 @@ void setup() {
 }
 
 void loop() {
-  while (digitalRead(xSwitchPin) == HIGH) {
+  while (digitalRead(xSwitchPin)) {
     // Set the spinning direction clockwise:
-    digitalWrite(xDirPin, HIGH);
+    digitalWrite(zDirPin, HIGH);
     // Spin the stepper motor 1 revolution quickly:
     for (int i = 0; i < stepsPerRevolution; i++) {
       // These four lines result in 1 step:
-      digitalWrite(xStepPin, HIGH);
+      digitalWrite(zStepPin, HIGH);
       delayMicroseconds(1000);
-      digitalWrite(xStepPin, LOW);
+      digitalWrite(zStepPin, LOW);
       delayMicroseconds(1000);
       }
   }
   
-  while (digitalRead(ySwitchPin) == HIGH) {
+  while (digitalRead(ySwitchPin)) {
     // Set the spinning direction counterclockwise:
-    digitalWrite(xDirPin, LOW);
+    digitalWrite(zDirPin, LOW);
     // Spin the stepper motor 1 revolution quickly:
     for (int i = 0; i < stepsPerRevolution; i++) {
       // These four lines result in 1 step:
-      digitalWrite(xStepPin, HIGH);
+      digitalWrite(zStepPin, HIGH);
       delayMicroseconds(1000);
-      digitalWrite(xStepPin, LOW);
+      digitalWrite(zStepPin, LOW);
       delayMicroseconds(1000);
       }
   }
