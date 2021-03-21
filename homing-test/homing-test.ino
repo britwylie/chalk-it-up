@@ -1,8 +1,9 @@
 #include <AccelStepper.h>
 #include <MultiStepper.h>
+#include <Keyboard.h>
 
 // Define limit switch pins
-#define xSwitchPin 8
+#define xSwitchPin 9
 #define ySwitchPin 10
 #define zSwitchPin 11
 
@@ -114,6 +115,15 @@ void homingSequence() {
   xPos = 0;
   yPos = 0;
   zPos = 0;
+  while (zPos <= 200) {
+    digitalWrite(zDirPin, LOW);
+    zPos += 1;
+    digitalWrite(zStepPin, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(zStepPin,LOW);
+    delayMicroseconds(1000);
+    Serial.print(zPos);
+  }
   
 }
 
@@ -189,7 +199,7 @@ void moveToCenter() {
       digitalWrite(xStepPin,LOW);
       delayMicroseconds(1000);
       checkHeight(); 
-    } else if (xPos > 850) {
+    } else if (xPos > 1000) {
       xPos -= 1;
       digitalWrite(xDirPin, HIGH);
       digitalWrite(xStepPin, HIGH);
@@ -203,14 +213,10 @@ void moveToCenter() {
 
 void loop() {
 
-  travelX();
-
   delayMicroseconds(1000000);
-
-  homingSequence();
-
-  delayMicroseconds(1000000);
-
   moveToCenter();
+  // move z axis down a bit
+  
+  
 
 }

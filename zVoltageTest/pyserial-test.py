@@ -18,7 +18,6 @@ def write_read(x):
     return data
 
 while True:
-   try:
     num = input("Enter a number: ")
     value = write_read(num)
     print(value)

@@ -10,7 +10,7 @@
 #define stepsPerRevolution 200
 
 // Define limit switch pins
-#define xSwitchPin 8
+#define xSwitchPin 9
 #define ySwitchPin 10
 #define zSwitchPin 11
 
@@ -43,27 +43,27 @@ void setup() {
 void loop() {
   while (digitalRead(xSwitchPin)) {
     // Set the spinning direction clockwise:
-    digitalWrite(zDirPin, HIGH);
+    digitalWrite(xDirPin, HIGH);
     // Spin the stepper motor 1 revolution quickly:
     for (int i = 0; i < stepsPerRevolution; i++) {
       // These four lines result in 1 step:
-      digitalWrite(zStepPin, HIGH);
+      digitalWrite(xStepPin, HIGH);
       delayMicroseconds(1000);
-      digitalWrite(zStepPin, LOW);
+      digitalWrite(xStepPin, LOW);
       delayMicroseconds(1000);
       }
   }
   
   while (digitalRead(ySwitchPin)) {
-    // Set the spinning direction counterclockwise:
-    digitalWrite(zDirPin, LOW);
-    // Spin the stepper motor 1 revolution quickly:
-    for (int i = 0; i < stepsPerRevolution; i++) {
-      // These four lines result in 1 step:
-      digitalWrite(zStepPin, HIGH);
-      delayMicroseconds(1000);
-      digitalWrite(zStepPin, LOW);
-      delayMicroseconds(1000);
+      // Set the spinning direction counterclockwise:
+      digitalWrite(xDirPin, LOW);
+      // Spin the stepper motor 1 revolution quickly:
+      for (int i = 0; i < stepsPerRevolution; i++) {
+      //   These four lines result in 1 step:
+        digitalWrite(xStepPin, HIGH);
+        delayMicroseconds(1000);
+        digitalWrite(xStepPin, LOW);
+        delayMicroseconds(1000);
       }
   }
 
