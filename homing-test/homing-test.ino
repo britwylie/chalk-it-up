@@ -40,9 +40,11 @@ int zPos = 0;
 int xEND = false;
 int yEND = false;
 
-
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
+  Serial.setTimeout(1);
+
+  
   // Declare limit switches and current sensor as input:
   pinMode(xSwitchPin, INPUT);
   pinMode(ySwitchPin, INPUT);
@@ -211,11 +213,4 @@ void loop() {
 
   moveToCenter();
 
-  while(true) // remain here until told to break
-  {
-    if(Serial.available() > 0 ) // did something come in?
-      if(Serial.read() == 'C') // is that something the char G?
-        break;
-  }  
-  
 }
