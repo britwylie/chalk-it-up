@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+
+
+import serial 
+ser = serial.Serial('/dev/ttyACM0')
+ser_bytes = ser.readline()
+print('working!')
