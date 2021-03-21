@@ -3,10 +3,6 @@
 #define ySwitchPin 10
 #define zSwitchPin 11
 
-int xSwitchState = 0;
-int ySwitchState = 0;
-int zSwitchState = 0;
-
 void setup() {
   // Declare limit switches and current sensor as input:
   pinMode(xSwitchPin, INPUT);
@@ -16,14 +12,14 @@ void setup() {
 }
 
 void loop() {
-  if (xSwitchState == HIGH) {
-    digitalWrite(LED_BUILTIN, HIGH);
+  if (digitalRead(xSwitchPin) == HIGH) {
+    digitalWrite(LED_BUILTIN, LOW);
   }
-  else if (ySwitchState == HIGH) {
-    digitalWrite(LED_BUILTIN, HIGH);
+  else if (digitalRead(ySwitchPin) == HIGH) {
+    digitalWrite(LED_BUILTIN, LOW);
   }
-  else if (zSwitchState == HIGH) {
-    digitalWrite(LED_BUILTIN, HIGH);
+  else if (digitalRead(zSwitchPin) == HIGH) {
+    digitalWrite(LED_BUILTIN, LOW);
   }
-  else digitalWrite(LED_BUILTIN, LOW);
+  else digitalWrite(LED_BUILTIN, HIGH);
 }
